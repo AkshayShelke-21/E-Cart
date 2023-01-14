@@ -1,59 +1,42 @@
 package com.entities;
 
 public class Order {
-	private int orderid;
-	private int userid;
-	private int productid;
-	private int productqty;
-	private int orderprice;
-
-	public int getOrderid() {
-		return orderid;
+	private int orderId;
+	private int userId;
+	private int productId;
+	private int productQty;
+	private int orderPrice;
+	public int getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	public int getProductId() {
+		return productId;
+	}
+	public void setProductId(int productId) {
+		this.productId = productId;
+	}
+	public int getProductQty() {
+		return productQty;
+	}
+	public void setProductQty(int productQty) {
+		this.productQty = productQty;
+	}
+	public int getOrderPrice() {
+		return orderPrice;
+	}
+	public void setOrderPrice(int orderPrice) {
+		this.orderPrice = orderPrice;
 	}
 
-	public void setOrderid(int orderid) {
-		this.orderid = orderid;
-	}
-
-	public int getUserid() {
-		return userid;
-	}
-
-	public void setUserid(int userid) {
-		this.userid = userid;
-	}
-
-	public int getProductid() {
-		return productid;
-	}
-
-	public void setProductid(int productid) {
-		this.productid = productid;
-	}
-
-	public int getProductqty() {
-		return productqty;
-	}
-
-	public void setProductqty(int productqty) {
-		this.productqty = productqty;
-	}
-
-	public int getOrderprice() {
-		return orderprice;
-	}
-
-	public void setOrderprice(int orderprice) {
-		this.orderprice = orderprice;
-	}
-
-	public Order(int orderid, int userid, int productid, int productqty, int orderprice) {
-		super();
-		this.orderid = orderid;
-		this.userid = userid;
-		this.productid = productid;
-		this.productqty = productqty;
-		this.orderprice = orderprice;
-	}
+	
 
 }

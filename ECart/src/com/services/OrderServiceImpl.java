@@ -5,22 +5,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
 import com.entities.Order;
 import com.messages.MessageProperties;
 
 
 
-public class OrderServiceImpl  implements orderservice {
+public class OrderServiceImpl  implements Orderservice {
 	private Connection Con;
 	
 	public OrderServiceImpl(Connection con) {
 		super();
 		this.Con=con;
 	}
-	
-
-	
 
 	@Override
 	public int placeOrder(String token, Order order) {
@@ -33,6 +29,11 @@ public class OrderServiceImpl  implements orderservice {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+
+	
+
+
 
 	
 	}

@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Connections {
-	Connection connection=null;
+	static Connection connection=null;
 	
-	public Connection getConnect() throws ClassNotFoundException{
+	public static Connection getConnect() throws ClassNotFoundException{
 		
 		try {
 			
