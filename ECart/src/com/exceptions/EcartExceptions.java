@@ -1,21 +1,22 @@
 package com.exceptions;
 
-import com.ecommerce.exception.EcommerceException;
+import com.ecommerce.exception.EcartExceptions;
 import com.ecommerce.exception.RuntimeException;
 import com.ecommerce.exception.String;
-import com.ecommerce.exception.USER_ALREADY_PRESENT;
+import com.ecommerce.exception.User_Already_Present;
 import com.ecommerce.exception.enum;
 
 public class EcartExceptions extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 	public enum ExceptionType {
-        USER_ALREADY_PRESENT,
-        EMAIL_NOT_FOUND,
-        PASSWORD_INCORRECT,
-        EMAIL_NOT_VERIFIED,
-        UNAUTHORISED_USER,
-        PRODUCT_NOT_FOUND,
-        INTERNAL_ERROR,
+		User_Already_Present,
+        Email_Not_Found,
+        Password_Incorrect,
+        Email_Not_Verified,
+        Unauthorised_User,
+        Product_Not_Found,
+        Internal_Error,
+
     }
 	public EcartExceptions.ExceptionType type;
 	
