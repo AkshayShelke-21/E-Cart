@@ -37,6 +37,9 @@ public class Cart {
 		this.productId = productId;
 		this.productQty = productQty;
 	}
+	public Cart() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	
 
