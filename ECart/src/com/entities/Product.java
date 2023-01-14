@@ -1,7 +1,7 @@
 package com.entities;
 
 public class Product {
-	 private int id;
+	private int id;
 	 private String productName;
 	 private String productDiscreption;
 	 private float productPrice;
@@ -44,8 +44,4 @@ public class Product {
 		this.productPrice = productPrice;
 		this.productQty = productQty;
 	}
-	 
-	 
-	 
-
 }
