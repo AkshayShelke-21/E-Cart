@@ -10,8 +10,10 @@ import com.messages.MessageProperties;
 
 
 
-public class OrderServiceImpl  implements Orderservice {
+public class OrderServiceImpl  implements OrderServiceInterface {
 	private Connection Con;
+	
+	
 	
 	public OrderServiceImpl(Connection con) {
 		super();

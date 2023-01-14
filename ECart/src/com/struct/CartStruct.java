@@ -4,7 +4,7 @@ public class CartStruct {
 	//Cart Structure for designing and storing 
 	private int productId;
 	private String productName;
-	private int productQuantity;
+	private int productQty;
 	private int productPrice;
 	private int totalPrice;
 	
@@ -21,11 +21,11 @@ public class CartStruct {
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-	public int getProductQuantity() {
-		return productQuantity;
+	public int getProductQty() {
+		return productQty;
 	}
-	public void setProductQuantity(int productQuantity) {
-		this.productQuantity = productQuantity;
+	public void setProductQuantity(int productQty) {
+		this.productQty = productQty;
 	}
 	public int getProductPrice() {
 		return productPrice;

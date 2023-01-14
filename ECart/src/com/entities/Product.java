@@ -5,7 +5,7 @@ public class Product {
 	 private String productName;
 	 private String productDiscreption;
 	 private float productPrice;
-	 private float productQty;
+	 private int productQty;
 	public int getId() {
 		return id;
 	}
@@ -30,10 +30,10 @@ public class Product {
 	public void setProductPrice(float productPrice) {
 		this.productPrice = productPrice;
 	}
-	public float getProductQty() {
+	public int getProductQty() {
 		return productQty;
 	}
-	public void setProductQty(float productQty) {
+	public void setProductQty(int productQty) {
 		this.productQty = productQty;
 	}
 	public Product(int id, String productName, String productDiscreption, float productPrice, float productQty) {
