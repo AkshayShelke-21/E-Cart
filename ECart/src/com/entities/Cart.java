@@ -6,6 +6,7 @@ public class Cart {
 	private int usreId;
 	private int productId;
 	private int productQty;
+	
 	public int getCartId() {
 		return cartId;
 	}

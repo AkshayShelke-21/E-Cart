@@ -8,10 +8,10 @@ import com.struct.CartStruct;
 public interface CartServiceInterface {
 	
 
-	int increaseOtyAndPriceInCartWhenProductIsAddedInCart(String token, Cart cart, int cartId);
+	int increaseOtyAndPriceInCartWhenProductIsAddedInCart(String querry, Cart cart, int cartId);
 
-	int addToCart(String token, Cart cart);
+	int addToCart(String querry, Cart cart);
 
-	List<CartStruct> getCartDetails(String token);
+	List<CartStruct> getCartDetails(String querry);
 
 }
