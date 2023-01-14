@@ -1,7 +1,7 @@
 package com.exceptions;
 
-import com.ecommerce.exception.EcartExceptions;
-import com.ecommerce.exception.RuntimeException;
+import com.exception.EcartExceptions;
+import com.exception.RuntimeException;
 import com.ecommerce.exception.String;
 import com.ecommerce.exception.User_Already_Present;
 import com.ecommerce.exception.enum;
