@@ -7,10 +7,10 @@ import java.sql.SQLException;
 import java.util.List;
 import com.entities.Order;
 import com.messages.MessageProperties;
+import com.struct.OrderStruct;
 
 
-
-public class OrderServiceImpl  implements Orderservice {
+public class OrderServiceImpl  implements OrderServiceInterface{
 	private Connection Con;
 	
 	public OrderServiceImpl(Connection con) {
@@ -25,10 +25,14 @@ public class OrderServiceImpl  implements Orderservice {
 	}
 
 	@Override
-	public List checkuserOrderHistory(int userId, String token) {
+	public List<OrderStruct> checkuserOrderHistory(int userId, String token) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
+
+	
 	
 
 	
