@@ -26,15 +26,15 @@ public class UserServiceImpl implements UserServiceInterface{
 	//Function to find the user by Username and return a user resultset. 
 	public ResultSet findByUsername(String username) {
 		PreparedStatement findByUsername = null;
-		ResultSet set = null;
+		ResultSet resultSet = null;
 		try {
 			 findByUsername = con.prepareStatement("select user_password, user_name, is_admin, user_id from user where user_name=?");
-			findByUsername.setString(1, username);
-			set = findByUsername.executeQuery();
+			 findByUsername.setString(1, username);
+			 resultSet = findByUsername.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return set;
+		return resultSet;
 	}
 	
 	
@@ -108,8 +108,9 @@ public class UserServiceImpl implements UserServiceInterface{
 			while(resultSet.next()) {
 				user = new User();
 				user.setUserId(resultSet.getInt(1));
-				user.setAdmin(resultSet.getBoolean(2));
-				user.setUsername(resultSet.getString(3));
+				user.setUsername(resultSet.getString(2));
+				user.setAdmin(resultSet.getBoolean(3));
+				user.setUsername(resultSet.getString(4));
 				userList.add(user);
 			}
 		} catch (SQLException e) {
@@ -122,13 +123,12 @@ public class UserServiceImpl implements UserServiceInterface{
 
 	//Function to set user as an admin (Rights reserved exclusively for Admin). 
 	@Override
-	public int makeUserAsAdmin(String mod, int userId) {
+	public int makeUserAdmin(String mod, int userId) {
 		// TODO Auto-generated method stub
 		
-		int implVar =0;
+		int varImpl =0;
 		PreparedStatement stat = null;
 		ResultSet user = findByUsername(mod);
-		String query="update user set is_admin=? where user_id=?";
 		try {
 			if(!user.next()) {
 				throw new EcartExceptions(MessageProperties.PLEASE_LOGIN.getMessage());
@@ -137,13 +137,13 @@ public class UserServiceImpl implements UserServiceInterface{
 			if(!isAdmin) {
 				throw new EcartExceptions(MessageProperties.GET_PERMISSION.getMessage());
 			}
-			stat = con.prepareStatement(query);
+			stat = con.prepareStatement("update user set is_admin=? where user_id=?");
 			stat.setBoolean(1, true);
 			stat.setInt(2, userId);
-			implVar = stat.executeUpdate();
+			varImpl = stat.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return implVar;
+		return varImpl;
 	}
 }

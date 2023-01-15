@@ -1,6 +1,7 @@
 package com.struct;
 
 public class CartStruct {
+	
 	//Cart Structure for designing and storing 
 	private int productId;
 	private String productName;

@@ -16,90 +16,94 @@ import com.struct.CartStruct;
 public class CartServiceImpl implements CartServiceInterface {
 	private Connection con;
 	
+	//Constructor with Connection object argument.
 	public CartServiceImpl(Connection con) {
 		this.con = con;
 	}
 	
+	//Function to find Cart byusing cartId.
 	public ResultSet findCartById(int cartId) {
 		ResultSet getCart = null;
 		try {
-			PreparedStatement st = con.prepareStatement("select * from cart where cart_id=?");
-			st.setInt(1, cartId);
-			getCart = st.executeQuery();
+			PreparedStatement pst = con.prepareStatement("select * from cart where cart_id=?");
+			pst.setInt(1, cartId);
+			getCart = pst.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return getCart;
 	}
 	
-	
+	//Function to find Cart by productId.
 	public ResultSet findCartByProductId(int productId) {
 		ResultSet getCart = null;
 		try {
-			PreparedStatement st = con.prepareStatement("select * from cart where product_id=?");
-			st.setInt(1, productId);
-			getCart = st.executeQuery();
+			PreparedStatement pst = con.prepareStatement("select * from cart where product_id=?");
+			pst.setInt(1, productId);
+			getCart = pst.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return getCart;
 	}
 	
-	
+	//Function to find Cart by userId.
 	public ResultSet findCartByUserId(int userId) {
 		ResultSet getCart = null;
 		try {
-			PreparedStatement st = con.prepareStatement("select * from cart where user_id=?");
-			st.setInt(1, userId);
-			getCart = st.executeQuery();
+			PreparedStatement pst = con.prepareStatement("select * from cart where user_id=?");
+			pst.setInt(1, userId);
+			getCart = pst.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return getCart;
 	}
 	
+	//Function to find Cart by userId and productId combinely.
 	public ResultSet findCartByUserIdAndProductId(int userId, int productId) {
 		ResultSet getCart = null;
 		try {
-			PreparedStatement st = con.prepareStatement("select * from cart where user_id=? and product_id=?");
-			st.setInt(1, userId);
-			st.setInt(2, productId);
-			getCart = st.executeQuery();
+			PreparedStatement pst = con.prepareStatement("select * from cart where user_id=? and product_id=?");
+			pst.setInt(1, userId);
+			pst.setInt(2, productId);
+			getCart = pst.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return getCart;
 	}
 	
-	
+	//Function to decrease quantity in cart when customer doesn't want product.
+	@Override
 	public int decreaseQtyInCart(String token, ResultSet getCart, Order order) {
-		int reduceQty = 0;
+		int reducedQty = 0;
 		ProductServiceImpl productService = new ProductServiceImpl(con);
-		String query = "update cart set product_qty=?, total_price=? where cart_id=?";
-		PreparedStatement st = null;
+		PreparedStatement pst = null;
 		try {
 			ResultSet getProduct = productService.findProductById(getCart.getInt(3));
-			st = con.prepareStatement(query);
+			pst = con.prepareStatement("update cart set product_qty=?, total_price=? where cart_id=?");
 			int qty = getCart.getInt(4) - order.getProductQty();
 			int price = getCart.getInt(5) - (order.getProductQty() * (getProduct.next() ? getProduct.getInt(4) : 1));
-			st.setInt(1, qty);
-			st.setInt(2, price);
-			st.setInt(3, getCart.getInt(1));
-			reduceQty = st.executeUpdate();
+			pst.setInt(1, qty);
+			pst.setInt(2, price);
+			pst.setInt(3, getCart.getInt(1));
+			reducedQty = pst.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return reduceQty;
+		return reducedQty;
 	}
 
 	
+	//Function to increase Price and Quantity of Cart when customer adds the product in cart.
 	@Override
 	public int increasePriceAndQtyWhenProductIsAdded(String username, Cart cart, int cartId) {
 		// TODO Auto-generated method stub
 		UserServiceImpl userService = new UserServiceImpl(con);
 		ProductServiceImpl productService = new ProductServiceImpl(con);
 		int updateQty = 0;
-		PreparedStatement state = null;
+		PreparedStatement pst = null;
 		try {
 			ResultSet getUser = userService.findByUsername(username);
 			ResultSet findCart = findCartById(cartId);
@@ -111,11 +115,11 @@ public class CartServiceImpl implements CartServiceInterface {
 			if (!findCart.next()) {
 				throw new EcartExceptions(MessageProperties.CART_NOT_FOUND.getMessage());
 			}
-			state = con.prepareStatement("update cart set product_qty=?, total_price=? where cart_id=?");
-			state.setInt(1, cart.getProductQty() + findCart.getInt(4));
-			state.setInt(2, findCart.getInt(5) + cart.getProductQty() * (product.next() ? product.getInt(4) : 1));
-			state.setInt(3, cartId);
-			updateQty = state.executeUpdate();
+			pst = con.prepareStatement("update cart set product_qty=?, total_price=? where cart_id=?");
+			pst.setInt(1, cart.getProductQty() + findCart.getInt(4));
+			pst.setInt(2, findCart.getInt(5) + cart.getProductQty() * (product.next() ? product.getInt(4) : 1));
+			pst.setInt(3, cartId);
+			updateQty = pst.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -123,12 +127,12 @@ public class CartServiceImpl implements CartServiceInterface {
 		return updateQty;
 	}
 
+	//Function for adding into cart.
 	@Override
 	public int addToCart(String username, Cart cart) {
 		// TODO Auto-generated method stub
 		int addeToCart = 0;
 		PreparedStatement state = null;
-		String query = "insert into cart(user_id, product_id, product_qty, total_price) values(?,?,?,?)";
 		try {
 			UserServiceImpl userService = new UserServiceImpl(con);
 			ProductServiceImpl productService = new ProductServiceImpl(con);
@@ -144,7 +148,7 @@ public class CartServiceImpl implements CartServiceInterface {
 			if (!isProductPresent) {
 				throw new EcartExceptions(MessageProperties.PRODUCT_NOT_FOUND.getMessage());
 			}
-			state = con.prepareStatement(query);
+			state = con.prepareStatement("insert into cart(user_id, product_id, product_qty, total_price) values(?,?,?,?)");
 			ResultSet cartByUserIdAndProductId=findCartByUserIdAndProductId(getUser.getInt(4), cart.getProductId());
 			boolean check = cartByUserIdAndProductId.next();
 			if (check) {
@@ -164,6 +168,8 @@ public class CartServiceImpl implements CartServiceInterface {
 		return addeToCart;
 	}
 
+	
+	//Function to get details of Cart.
 	@Override
 	public List<CartStruct> getCartDetails(String username) {
 		// TODO Auto-generated method stub
@@ -171,16 +177,16 @@ public class CartServiceImpl implements CartServiceInterface {
 		UserServiceImpl userService = new UserServiceImpl(con);
 		ResultSet getUser = userService.findByUsername(username);
 		ProductServiceImpl productService = new ProductServiceImpl(con);
-		PreparedStatement st = null;
+		PreparedStatement pst = null;
 		CartStruct cartStruct = null;
 		try {
 			boolean isLoggedIn = getUser.next();
 			if (!isLoggedIn) {
 				throw new EcartExceptions(MessageProperties.PLEASE_LOGIN.getMessage());
 			}
-			st = con.prepareStatement("select * from cart where user_id=?");
-			st.setInt(1, getUser.getInt(4));
-			ResultSet cart = st.executeQuery();
+			pst = con.prepareStatement("select * from cart where user_id=?");
+			pst.setInt(1, getUser.getInt(4));
+			ResultSet cart = pst.executeQuery();
 			while (cart.next()) {
 				cartStruct = new CartStruct();
 				cartStruct.setProductId(cart.getInt(3));

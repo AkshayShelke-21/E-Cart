@@ -21,6 +21,7 @@ public class OrderServiceImpl  implements OrderServiceInterface {
 		this.con = con;
 	}
 
+	//Function to place order by customer.
 	@Override
 	public int placeOrder(String query, Order order) {
 		// TODO Auto-generated method stub
@@ -83,6 +84,7 @@ public class OrderServiceImpl  implements OrderServiceInterface {
 		return orderPlaced;
 	}
 
+	//Function to Check the order history for the user.
 	@Override
 	public List<OrderStruct> checkuserOrderHistory(int userId, String query) {
 		// TODO Auto-generated method stub

@@ -18,9 +18,17 @@ import com.messages.MessageProperties;
 import java.util.List;
 import java.util.Scanner;
 
+
+
+/*
+  
+   ApplicationUtilities class is an utility class for the project where most used and generic methods are stored.
+   It contains classes for operation, login and display of users, products and cart details.
+ 
+ */
 public class ApplicationUtilities {
 
-
+	//Function to display list of all products in Database.
 	public static void allProducts() throws ClassNotFoundException {
 		ProductServiceInterface productService = new ProductServiceImpl(Connections.getConnect());
 		List<Product> getProductList = productService.fetchAllProduct();
@@ -37,7 +45,7 @@ public class ApplicationUtilities {
 				"__________________________________________________________________________________________________________________________");
 	}
 	
-	
+	//Function to get cart details of user.
 	public static void getCartDetailsOfUser(String mod) throws ClassNotFoundException {
 		System.out.println(MessageProperties.CART_DETAILS.getMessage());
 		CartServiceInterface cartService = new CartServiceImpl(Connections.getConnect());
@@ -54,7 +62,7 @@ public class ApplicationUtilities {
 
 	}
 	
-	
+	//Function for operations performed by user while purchasing the product.
 	public static void operation(String mod, Scanner sc) throws ClassNotFoundException {
 		CartServiceInterface cartService = new CartServiceImpl(Connections.getConnect());
 		OrderServiceInterface orderService = new OrderServiceImpl(Connections.getConnect());
@@ -93,7 +101,7 @@ public class ApplicationUtilities {
 	}
 	
 	
-	
+	//Function to login into the platform.
 	public static String login(String mod, Scanner sc) throws ClassNotFoundException {
 		UserServiceInterface userService = new UserServiceImpl(Connections.getConnect());
 		System.out.println("Please Login first");
@@ -112,6 +120,7 @@ public class ApplicationUtilities {
 	}
 	
 	
+	//Function to display list of all users.
 	public static void AllUser(String mod) throws ClassNotFoundException {
 		UserServiceImpl userService = new UserServiceImpl(Connections.getConnect());
 		System.out.println("____________________________________________________________________________________________________________________________");
@@ -124,6 +133,7 @@ public class ApplicationUtilities {
 	}
 	
 	
+	//Function to display order history of User.
 	public static void orderHistoryOfUser( int userId, String mod) throws ClassNotFoundException {
 		OrderServiceImpl orderService = new OrderServiceImpl(Connections.getConnect());
 		System.out.println("________________________________________________________________________________________________________________________________");

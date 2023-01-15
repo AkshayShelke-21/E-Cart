@@ -1,6 +1,7 @@
 package com.struct;
 
 public class OrderStruct {
+	
 	//Order Structure for designing and storing
 	private int orderId;
 	private String productName;
