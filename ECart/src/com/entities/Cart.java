@@ -6,6 +6,7 @@ public class Cart {
 	private int usreId;
 	private int productId;
 	private int productQty;
+	
 	public int getCartId() {
 		return cartId;
 	}
@@ -36,6 +37,9 @@ public class Cart {
 		this.usreId = usreId;
 		this.productId = productId;
 		this.productQty = productQty;
+	}
+	public Cart() {
+		// TODO Auto-generated constructor stub
 	}
 	
 	

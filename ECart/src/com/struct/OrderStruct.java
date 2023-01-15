@@ -1,11 +1,12 @@
 package com.struct;
 
 public class OrderStruct {
+	
 	//Order Structure for designing and storing
 	private int orderId;
 	private String productName;
 	private int userId;
-	private int productQuantity;
+	private int productQty;
 	private int orderTotal;
 	
 	//Getter and Setter Methods
@@ -27,11 +28,11 @@ public class OrderStruct {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public int getProductQuantity() {
-		return productQuantity;
+	public int getProductQty() {
+		return productQty;
 	}
-	public void setProductQuantity(int productQuantity) {
-		this.productQuantity = productQuantity;
+	public void setProductQty(int productQty) {
+		this.productQty = productQty;
 	}
 	public int getOrderTotal() {
 		return orderTotal;

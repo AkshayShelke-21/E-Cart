@@ -13,7 +13,7 @@ public class Connections {
 			
 			Class.forName("com.mysql.jdbc.Driver");
 			
-		    connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/E-Commers", "root", "root");
+		    connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecart", "root", "root");
 		}catch(SQLException e) {
 			e.getStackTrace();
 		}
