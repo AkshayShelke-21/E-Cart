@@ -9,7 +9,10 @@ import com.services.CartServiceImpl;
 import com.services.CartServiceInterface;
 import com.services.OrderServiceImpl;
 import com.services.OrderServiceInterface;
-import com.entities.*;
+import com.entities.Order;
+import com.entities.Cart;
+import com.entities.Product;
+import com.entities.UserLogin;
 import com.messages.MessageProperties;
 
 import java.util.List;
@@ -91,7 +94,7 @@ public class ApplicationUtilities {
 	
 	
 	
-	public static String login(String mod, Scanner sc) {
+	public static String login(String mod, Scanner sc) throws ClassNotFoundException {
 		UserServiceInterface userService = new UserServiceImpl(Connections.getConnect());
 		System.out.println("Please Login first");
 		System.out.print("Please Enter Email: ");
@@ -121,14 +124,13 @@ public class ApplicationUtilities {
 	}
 	
 	
-	@SuppressWarnings("unchecked")
-	public static void orderHistoryOfUser( int userId, String mod) {
+	public static void orderHistoryOfUser( int userId, String mod) throws ClassNotFoundException {
 		OrderServiceImpl orderService = new OrderServiceImpl(Connections.getConnect());
 		System.out.println("________________________________________________________________________________________________________________________________");
 		System.out.println("OrderId : Product name   : proudctQTY : OrderPrice");
 		System.out.println("--------------------------------------------------------------------------------------------------------------------");
 		orderService.checkuserOrderHistory(userId, mod).forEach(it->{
-			System.out.println( it.getOrderId()+"       : "+ it.getProductName()+"   :  "+it.getProductOty()+" : "+it.getOrderPrice());
+			System.out.println( it.getOrderId()+"       : "+ it.getProductName()+"   :  "+it.getProductQty()+" : "+it.getOrderTotal());
 		});
 		System.out.println("____________________________________________________________________________________________________________________________________");
 	}

@@ -30,7 +30,7 @@ public class OrderStruct {
 	public int getProductQty() {
 		return productQty;
 	}
-	public void setProductQuantity(int productQty) {
+	public void setProductQty(int productQty) {
 		this.productQty = productQty;
 	}
 	public int getOrderTotal() {
