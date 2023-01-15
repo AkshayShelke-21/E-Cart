@@ -13,19 +13,23 @@ import com.exceptions.EcartExceptions;
 import com.messages.MessageProperties;
 
 public class UserServiceImpl implements UserServiceInterface{
-	//
+	//A coonection object as a Global object.
 	private Connection con;
 	
+	
+	//Constructor with Connection object as an argument.
 	public UserServiceImpl(Connection con) {
 		this.con = con;
 	}
 	
-	public ResultSet findByUsername(String email) {
+	
+	//Function to find the user by Username and return a user resultset. 
+	public ResultSet findByUsername(String username) {
 		PreparedStatement findByUsername = null;
 		ResultSet set = null;
 		try {
 			 findByUsername = con.prepareStatement("select user_password, user_name, is_admin, user_id from user where user_name=?");
-			findByUsername.setString(1, email);
+			findByUsername.setString(1, username);
 			set = findByUsername.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -34,15 +38,17 @@ public class UserServiceImpl implements UserServiceInterface{
 	}
 	
 	
+	//Function to register the user when user is not found/new to platform.
 	@Override
-	public boolean createUserRegistration(User user) {
+	public boolean UserRegistration(User user) {
 		boolean isRegistred = false;
-		
+		//To check whether the user is already present.
 		try {
 			if(findByUsername(user.getUsername()).next()){
 				throw new EcartExceptions("This User Name is already registerd, Please Login!", 
 						EcartExceptions.ExceptionType.User_Already_Present);
 			}
+			//To insert new user details into Database.
 			PreparedStatement statemet = con.prepareStatement("INSERT INTO user(is_admin, user_name, user_id, user_password) VALUES (?,?,?,?)");
 			statemet.setBoolean(1, user.isAdmin());
 			statemet.setString(2, user.getUsername());
@@ -55,17 +61,17 @@ public class UserServiceImpl implements UserServiceInterface{
 		return isRegistred;
 	}
 
-
-
+	//Function to Login user into platform.
 	@Override
 	public String loginUser(UserLogin loginUser) {
 		// TODO Auto-generated method stub
 		
 		String mod = "";
 		try {
+			//To check whether the user is Present.
 			ResultSet userByUsername = findByUsername(loginUser.getUsername());
 			if(!userByUsername.next()) {
-				throw new EcartExceptions("User with this username is not registered, Please signUp First ", EcartExceptions.ExceptionType.Email_Not_Found);
+				throw new EcartExceptions("User with this username is not registered, Please signUp First ", EcartExceptions.ExceptionType.Username_Not_Found);
 			}
 			boolean password = loginUser.getPassword().equals(userByUsername.getString(1));
 			if(!password) {
@@ -80,7 +86,7 @@ public class UserServiceImpl implements UserServiceInterface{
 	}
 
 
-
+	//Function to get details of all users.
 	@Override
 	public List<User> getAllUsers(String mod) {
 		// TODO Auto-generated method stub
@@ -98,12 +104,12 @@ public class UserServiceImpl implements UserServiceInterface{
 						EcartExceptions.ExceptionType.Unauthorised_User );
 			}
 			PreparedStatement state = con.prepareStatement("select * from user");
-			ResultSet rs = state.executeQuery();
-			while(rs.next()) {
+			ResultSet resultSet = state.executeQuery();
+			while(resultSet.next()) {
 				user = new User();
-				user.setUserId(rs.getInt(1));
-				user.setAdmin(rs.getBoolean(2));
-				user.setUsername(rs.getString(3));
+				user.setUserId(resultSet.getInt(1));
+				user.setAdmin(resultSet.getBoolean(2));
+				user.setUsername(resultSet.getString(3));
 				userList.add(user);
 			}
 		} catch (SQLException e) {
@@ -114,7 +120,7 @@ public class UserServiceImpl implements UserServiceInterface{
 	}
 
 
-
+	//Function to set user as an admin (Rights reserved exclusively for Admin). 
 	@Override
 	public int makeUserAsAdmin(String mod, int userId) {
 		// TODO Auto-generated method stub

@@ -4,9 +4,10 @@ import java.util.*;
 import com.entities.User;
 import com.entities.UserLogin;
 
+//Interface to define User related Services.
 public interface UserServiceInterface {
 
-	public boolean createUserRegistration(User user);
+	public boolean UserRegistration(User user);
 
 	public String loginUser(UserLogin loginUser);
 
