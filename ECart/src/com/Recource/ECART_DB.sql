@@ -34,5 +34,5 @@ product_id int(10)NOT NULL,
 product_qty int(20)NOT NULL,
 order_price float NOT NULL
 FOREIGN KEY(product_id)REFERENCES product(product_id),
-FOREIGN KEY(user_id)REFERENCES user(user_id),
+FOREIGN KEY(user_id)REFERENCES user(user_id)
 )
