@@ -110,7 +110,7 @@ public class UserServiceImpl implements UserServiceInterface{
 				user.setUserId(resultSet.getInt(1));
 				user.setUsername(resultSet.getString(2));
 				user.setAdmin(resultSet.getBoolean(3));
-				user.setUsername(resultSet.getString(4));
+				//user.setUsername(resultSet.getString(4));
 				userList.add(user);
 			}
 		} catch (SQLException e) {
