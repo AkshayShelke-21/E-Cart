@@ -105,9 +105,9 @@ public class ApplicationUtilities {
 	public static String login(String mod, Scanner sc) throws ClassNotFoundException {
 		UserServiceInterface userService = new UserServiceImpl(Connections.getConnect());
 		System.out.println("Please Login first");
-		System.out.print("Please Enter Email: ");
+		System.out.print("Please Enter Username :");
 		String userName = sc.next();
-		System.out.println("Please Enter Your Password");
+		System.out.println("Please Enter Your Password :");
 		String pass = sc.next();
 		UserLogin loginUser = new UserLogin(userName, pass);
 		

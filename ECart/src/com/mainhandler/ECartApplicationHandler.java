@@ -3,6 +3,7 @@ package com.mainhandler;
 import java.util.Scanner;
 
 import com.connection.Connections;
+import com.entities.Product;
 import com.entities.User;
 import com.messages.MessageProperties;
 import com.services.ProductServiceImpl;
@@ -47,7 +48,7 @@ public class ECartApplicationHandler {
 			Boolean running=true;
 			while(running) {
 				System.out.println("*****************Product Details**********************************");
-				AppUtils.allProducts();
+				ApplicationUtilities.allProducts();
 				System.out.println("Select Option from following : ");
 				System.out.println("To know all Users : 1");
 				System.out.println("To check order history of user : 2");
@@ -71,7 +72,7 @@ public class ECartApplicationHandler {
 					ApplicationUtilities.orderHistoryOfUser(id,query);
 					break;
 				case 3:
-					com.entities.Product pr = new com.entities.Product();
+					Product pr = new Product();
 					System.out.println("Please Enter Product Name: ");
 					String pName = sc.next();
 					pr.setProductName(pName);
@@ -80,7 +81,7 @@ public class ECartApplicationHandler {
 					pr.setProductPrice(pPrice);
 					System.out.println("Please Enter Product Description : ");
 					String desc = sc.next();
-					pr.setProductDecription(desc);
+					pr.setProductDiscreption(desc);
 					System.out.println("Please Set Qty Of prodcut : ");
 					int qty = sc.nextInt();
 					pr.setProductQty(qty);
