@@ -48,6 +48,8 @@ public class UserServiceImpl implements UserServiceInterface{
 				throw new EcartExceptions("This User Name is already registerd, Please Login!", 
 						EcartExceptions.ExceptionType.User_Already_Present);
 			}
+			
+			
 			//To insert new user details into Database.
 			PreparedStatement statemet = con.prepareStatement("INSERT INTO user(is_admin, user_name, user_id, user_password) VALUES (?,?,?,?)");
 			statemet.setBoolean(1, user.isAdmin());
