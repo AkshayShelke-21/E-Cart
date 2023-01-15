@@ -12,13 +12,8 @@ import com.messages.MessageProperties;
 import com.struct.OrderStruct;
 
 
-<<<<<<< HEAD
-public class OrderServiceImpl  implements OrderServiceInterface{
-	private Connection Con;
-=======
 public class OrderServiceImpl  implements OrderServiceInterface {
 	private Connection con;
->>>>>>> 2d6e79c0f7b108c3667a2b5ce0595fe73e1a6515
 	
 	//Constuctor with Connection object as an argument
 	public OrderServiceImpl(Connection con) {
@@ -91,23 +86,6 @@ public class OrderServiceImpl  implements OrderServiceInterface {
 
 	//Function to Check the order history for the user.
 	@Override
-<<<<<<< HEAD
-	public List<OrderStruct> checkuserOrderHistory(int userId, String token) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
-
-	
-	
-
-	
-
-
-
-	
-=======
 	public List<OrderStruct> checkuserOrderHistory(int userId, String query) {
 		// TODO Auto-generated method stub
 		List<OrderStruct> orderList = new ArrayList<>();
@@ -147,7 +125,6 @@ public class OrderServiceImpl  implements OrderServiceInterface {
 			e.printStackTrace();
 		}
 		return orderList;
->>>>>>> 2d6e79c0f7b108c3667a2b5ce0595fe73e1a6515
 	}
 }
 

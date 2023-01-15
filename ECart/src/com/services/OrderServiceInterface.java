@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.entities.Order;
 import com.struct.OrderStruct;
-import java.entities.Order;
-import java.struct.OrderStruct;
 
 public interface OrderServiceInterface{
 
